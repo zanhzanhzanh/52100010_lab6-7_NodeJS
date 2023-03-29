@@ -55,14 +55,8 @@ const configServer = (app, localDir) => {
     // Cấu hình lưu trữ file
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
-            const rootFolder = path.join(__dirname, 'upload');
-            const folderPath = path.join(rootFolder, req.body.folderName);
-            // Kiểm tra xem thư mục có tồn tại hay chưa, nếu chưa thì tạo mới
-            if (!fs.existsSync(folderPath)) {
-                fs.mkdirSync(folderPath, { recursive: true });
-            }
             // Thư mục để lưu file upload
-            cb(null, folderPath);
+            cb(null, './src/public/upload');
         },
         filename: function (req, file, cb) {
             // Đặt tên file là tên file gốc

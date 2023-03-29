@@ -22,9 +22,8 @@ const routers = (app, upload) => {
 
     router.post('/register', validationUser.checkRegister, userControllers.createUser);
 
-    router.post('/upload', upload.any(), (req, res) => {
-        console.log(req);
-        res.send(req.files);
+    router.post('/upload', upload.single('uploadFile'), (req, res) => {
+        res.send(req.file.path);
     })
 
     return app.use('/', router);
